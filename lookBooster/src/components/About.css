@@ -1,0 +1,13 @@
+.opacity-60 {
+    opacity: .6;
+}
+.object-cover {
+    object-fit: cover;
+}
+.left-0 {
+    left: 0;
+}
+video {
+    height: auto;
+    max-width: 100%;
+}

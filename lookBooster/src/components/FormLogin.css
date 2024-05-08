@@ -1,0 +1,22 @@
+*{
+    font-family: 'Alegreya Sans SC', sans-serif;   
+}
+.btn{
+    background-color: #2d5588ff;
+    border-color: #9f815fff;
+}
+    .btn:hover{
+        background-color: #d34f4aff;
+        border-color: #ddca8fff;
+    }
+a{
+    color: #d34f4aff;
+    text-decoration: none;
+}
+    a:hover{
+        color: #2d5588ff;
+    }
+.form-control:focus{
+    border-color: #ddca8fff;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #d34f4aff;
+}

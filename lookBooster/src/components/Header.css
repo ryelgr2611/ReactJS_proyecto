@@ -1,0 +1,43 @@
+@import url('https://fonts.cdnfonts.com/css/alegreya-sans-sc');@import url('https://fonts.cdnfonts.com/css/madness-hyperactive');
+#colors{
+    --white: #fefefeff;
+    --vanilla: #ddca8fff;
+    --chamoisee: #9f815fff;
+    --yinmn-blue: #2d5588ff;
+    --jasper: #d34f4aff;
+  }
+body{
+    background-image: linear-gradient(to bottom, #fefefeff, #ddca8fff);
+    min-height: 100vh;
+    font-family: 'Alegreya Sans SC', sans-serif;    
+    color: black;
+    font-weight: bolder;
+}
+/* Estilos para el encabezado */
+nav {
+    background-color: rgba(232, 207, 178, 0.651);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    font-family: 'Alegreya Sans SC', sans-serif;    
+    padding: 0;
+    width: 100%;
+    z-index: 1000;
+    font-size: larger;
+}
+.navbar-nav .nav-link{
+    color: rgb(0, 0, 0); 
+    font-weight: bold;
+}
+.nav-link:hover{
+    color:rgb(245, 149, 146);
+}
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+.dropdown-menu.show {
+    display: flex;
+    justify-content: center;
+    background-color: rgba(255, 222, 173, 0);
+}
+
+
+
