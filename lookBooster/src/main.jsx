@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header';
 import FormularioLogin from './components/FormularioLogin';
 import About from './components/About';
+import Carrusel from './components/Carrusel';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -16,6 +17,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <>
               <Header />
               <About />
+              <Carrusel />
             </>
           }
         /> {/* Renderiza Header y About juntos */}

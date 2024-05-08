@@ -4,19 +4,21 @@ import { Link } from 'react-router-dom'
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import logo from '../assets/logoCompleto.png';
 import './About.css';
-
+import { TbArrowBadgeDown } from "react-icons/tb";
 
 
 function About() {
     return (
-        <div className='relative px-4 h-[75vh] bg-neutral-900 flex flex-col gap-4 justify-center items-center'>
-            <h2 className='z-20 text-neutral-300 text-3xl text-center'>Looking Your Best Never Goes Out of Style.</h2>
-            <Link to='/reservations' className='bg-red-900 nav z-20 text-neutral-300 text-3xl px-4 py-2 font-bold block'>Book Now</Link>
-            <video className='absolute opacity-60 top-0 left-0 w-full h-full object-cover' src={barbervid} muted loop autoPlay>
-                
-            </video>
+        <div className='contenedor'>
+            <video className='video opacity-75 ' src={barbervid} muted loop autoPlay />
+            <h2 className='centrado mt-3 opacity-100 mb-3 fs-1 '>¿A qué esperas?</h2>
+            <Link to='/reservations' className='centro-en-video fs-1'>Pide cita ya!</Link>
+            <h2 className='text-center fw-bold '>Los mejores cortes a tan solo un click</h2>
+            <h2 className=' textillo text-center fs-3 '><TbArrowBadgeDown />Echa un vistazo a algunas de nuestras obras maestras.<TbArrowBadgeDown /></h2>
+            
+
         </div>
-      )
+        )
     }
 
 export default About;

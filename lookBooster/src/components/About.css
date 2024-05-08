@@ -1,13 +1,39 @@
-.opacity-60 {
-    opacity: .6;
-}
-.object-cover {
+@import url('https://fonts.cdnfonts.com/css/madness-hyperactive');
+.contenedor {
+    position: relative;
+    
+  }
+  
+  .centrado {
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    z-index: 1;
+    top: 30%;
+    color: white;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+  }
+  
+  .video {
+    width: 100%;
     object-fit: cover;
-}
-.left-0 {
-    left: 0;
-}
-video {
-    height: auto;
-    max-width: 100%;
-}
+    height: 100%;
+  }
+  
+  .centro-en-video {
+    position: absolute;
+    cursor: pointer;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white; /* Cambia el color del texto si es necesario */
+    text-decoration: none; /* Elimina la decoración de subrayado del enlace */
+    font-size: 1.5em; /* Ajusta el tamaño del texto si es necesario */
+  }
+  .textillo{
+    color: #d34f4aff;
+    font-family: 'Madness Hyperactive', sans-serif;
+    text-align: center;
+  }
+  

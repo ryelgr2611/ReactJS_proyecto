@@ -1,0 +1,13 @@
+.react-multi-carousel-list {
+    align-items: center;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    height: 400px;
+    
+}
+.carouselImg{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}

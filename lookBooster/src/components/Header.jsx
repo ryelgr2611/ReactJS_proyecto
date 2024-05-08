@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import logo from '../assets/logoCompleto.png';
 import './Header.css';
+import { LuLogIn } from "react-icons/lu";
 
 function Header() {
   return (
@@ -30,7 +31,7 @@ function Header() {
             <Nav.Link as={Link} to="/contact">Contacto</Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link as={Link} to="/login">Iniciar Sesión</Nav.Link>
+            <Nav.Link as={Link} to="/login"> <LuLogIn /> Iniciar Sesión</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
