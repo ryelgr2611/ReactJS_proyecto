@@ -1,3 +1,15 @@
 .relative {
     position: relative;
 }
+.textos{
+    text-shadow: 2px 2px 4px rgb(0, 0, 0);
+}
+.textoLink:hover{
+    text-shadow: 2px 2px 4px rgb(255, 255, 255);
+    color: #2d5588ff;
+    transition: text-shadow 0.5s ease, color 0.5s ease;
+}
+
+.brightness-80 {
+  filter: brightness(80%);
+}

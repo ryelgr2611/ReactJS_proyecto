@@ -13,6 +13,7 @@
     color: white;
     transform: translate(-50%, -50%);
     font-size: 2em;
+    text-shadow: 2px 2px 4px rgb(0, 0, 0);
   }
   
   .video {
@@ -27,9 +28,15 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: white; /* Cambia el color del texto si es necesario */
-    text-decoration: none; /* Elimina la decoración de subrayado del enlace */
-    font-size: 1.5em; /* Ajusta el tamaño del texto si es necesario */
+    color: white; 
+    text-decoration: none; 
+    font-size: 1.5em; 
+    text-shadow: 2px 2px 4px rgb(0, 0, 0);
+  }
+  .centro-en-video:hover{
+    text-shadow: 2px 2px 4px rgb(255, 255, 255);
+    color: #d34f4aff;
+    transition: text-shadow 0.5s ease, color 0.5s ease;
   }
   .textillo{
     color: #d34f4aff;

@@ -8,7 +8,8 @@
     --jasper: #d34f4aff;
   }
 body{
-    background-image: linear-gradient(to bottom, #fefefeff, #ddca8fff);
+    /* background-image: linear-gradient(to bottom, #fefefeff, #ddca8fff); */
+    background-color: rgb(226,239,236);
     min-height: 100vh;
     font-family: 'Alegreya Sans SC', sans-serif;    
     color: black;
@@ -16,12 +17,11 @@ body{
 }
 /* Estilos para el encabezado */
 nav {
-    background-color: rgba(232, 207, 178, 0.651);
+    background-color: rgb(226,239,236);
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
     font-family: 'Alegreya Sans SC', sans-serif;    
     padding: 0;
     width: 100%;
-    z-index: 1000;
     font-size: larger;
 }
 .navbar-nav .nav-link{
@@ -29,16 +29,40 @@ nav {
     font-weight: bold;
 }
 .nav-link:hover{
-    color:rgb(245, 149, 146);
+    color:#9f815fff;
+}
+.navbar-toggler {
+    border: none;
+    color: #2d5588ff;
+}
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='%23d34f4aff' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 .navbar-toggler:focus {
     box-shadow: none;
+    
+}
+.navbar-collapse {
+    background-color: rgb(226,239,236);
+    ::-webkit-scrollbar {
+        display: none;
+    }
 }
 .dropdown-menu.show {
     display: flex;
     justify-content: center;
     background-color: rgba(255, 222, 173, 0);
+    border: none;
+    right: 50%;
 }
 
-
-
+.dropdown-item {
+    color: #2d5588ff;
+    font-weight: bold;
+    border: none;
+}
+.dropdown-item:hover {
+    color: #d34f4aff;
+    background-color: rgba(255, 222, 173, 0);
+    text-shadow: 1px 1px 2px rgb(146, 146, 146);
+}

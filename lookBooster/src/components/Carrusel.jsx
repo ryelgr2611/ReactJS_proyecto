@@ -47,17 +47,15 @@ function Carrusel(props) {
       dotListClass="custom-dot-list-style"
       itemClass="carousel-item-padding-40-px"
     >
-    <img src={Carr1} className="carouselImg" />
-    <img src={Carr2} className="carouselImg" />
-    <img src={Carr3} className="carouselImg" />
-    <img src={Carr4} className="carouselImg" />
-    <img src={Carr5} className="carouselImg" />
-    <img src={Carr6} className="carouselImg" />
-    <img src={Carr7} className="carouselImg" />
-    <img src={Carr8} className="carouselImg" />
-
-    
-  </Carousel>
+      <img src={Carr1} className="d-block w-100" />
+      <img src={Carr2} className="d-block w-100" />
+      <img src={Carr3} className="d-block w-100" />
+      <img src={Carr4} className="d-block w-100" />
+      <img src={Carr5} className="d-block w-100" />
+      <img src={Carr6} className="d-block w-100" />
+      <img src={Carr7} className="d-block w-100" />
+      <img src={Carr8} className="d-block w-100" />
+    </Carousel>
   )
 }
 

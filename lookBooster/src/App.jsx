@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useEffect } from 'react';
-import './App.css';
+
 import { collection, getDocs, addDoc } from "firebase/firestore";
 import { db } from './firebase/config';
 
