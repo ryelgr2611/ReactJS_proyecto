@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'; // Importamos Routes y Route desde react-router-dom
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header';
-import FormularioLogin from './components/FormularioLogin';
+import FormularioLogin from './pages/FormularioLogin';
 import About from './components/About';
 import Carrusel from './components/Carrusel';
+import Equipo from './components/Equipo';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -18,6 +19,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
               <Header />
               <About />
               <Carrusel />
+              <Equipo />
             </>
           }
         /> {/* Renderiza Header y About juntos */}
