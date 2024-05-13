@@ -13,3 +13,7 @@
 .brightness-80 {
   filter: brightness(80%);
 }
+.imgEquipo{
+    object-fit: cover;
+    border-radius: 8px;
+}

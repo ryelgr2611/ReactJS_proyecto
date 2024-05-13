@@ -7,6 +7,7 @@ import FormularioLogin from './pages/FormularioLogin';
 import About from './components/About';
 import Carrusel from './components/Carrusel';
 import Equipo from './components/Equipo';
+import Footer from './components/Footer';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -20,6 +21,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
               <About />
               <Carrusel />
               <Equipo />
+              <Footer />
             </>
           }
         /> {/* Renderiza Header y About juntos */}
