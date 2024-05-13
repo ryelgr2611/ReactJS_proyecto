@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&display=swap');
+
 *{
-    font-family: 'Alegreya Sans SC', sans-serif;   
+    font-family: 'Alegreya', sans-serif;   
 }
 .btn{
     background-color: #2d5588ff;

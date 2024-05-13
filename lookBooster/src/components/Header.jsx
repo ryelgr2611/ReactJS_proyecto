@@ -4,8 +4,14 @@ import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import logo from '../assets/logoCompleto.png';
 import './Header.css';
 import { LuLogIn } from "react-icons/lu";
+import { LuLogOut } from "react-icons/lu";
+import app from '../firebase/config';
+import { getAuth,signOut } from 'firebase/auth';
 
-function Header() {
+const auth = getAuth(app);
+
+
+function Header({correoUsuario}) {
   return (
     <Navbar expand="lg" className="fs-3 sticky-top ">
       <Container fluid>
@@ -31,7 +37,8 @@ function Header() {
             <Nav.Link as={Link} to="/contact">Contacto</Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link as={Link} to="/login"> <LuLogIn /> Iniciar Sesión</Nav.Link>
+            <Nav.Link as={Link} to="/login">{correoUsuario ?  correoUsuario : <LuLogIn /> +"Iniciar Sesión"} </Nav.Link>
+            <Nav.Link as={Link} onClick={() => signOut(auth)}>{correoUsuario ? <LuLogOut /> : "" } </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
