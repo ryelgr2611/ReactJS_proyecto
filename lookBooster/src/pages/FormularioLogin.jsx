@@ -6,29 +6,63 @@ import { Link } from 'react-router-dom';
 import { FaGoogle, FaApple } from "react-icons/fa";
 import app from '../firebase/config';
 import 'firebase/auth';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth';
+import { getAuth } from 'firebase/auth'; // Add this import statement
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'; // Add this import statement
+import { db } from '../firebase/config';
+import { collection, addDoc, getDocs } from 'firebase/firestore'; 
 
 const auth = getAuth(app);
+const dbClientes = collection(db, 'clientes');
+// getDocs(dbClientes)
+//   .then((doc) => {
+//     console.log(doc.docs[0].data());});
+const dbEmpleados = collection(db, 'empleados');
 
 
 function FormularioLogin() {
   const [registrando, setRegistrando] = useState(false);
+  const [userId, setUserId] = useState('');
 
   const iniciarSesion = async (e) => {
     
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
+    const name = e.target.name.value;
+    const surname = e.target.surname.value;
+    const phone = e.target.phone.value;
+    let userId ;
 
+    
+
+    
     if (registrando) {
       await createUserWithEmailAndPassword(auth, email, password);
-      console.log('Usuario creado');
+      userId = auth.currentUser.uid;
+      const usuario={
+        id: userId,
+        correo: email,
+        contraseña: password,
+        nombre: name,
+        apellido: surname,
+        telefono: phone
+      }
+        if (email.includes('@lookbooster')) {
+          await addDoc(dbEmpleados, usuario);
+                
+          console.log('Empleado registrado');
+        } else {
+          await addDoc(dbClientes, usuario);
+          console.log('Cliente registrado');
+        }
     } else {
       await signInWithEmailAndPassword(auth, email, password);
+      
       console.log('Usuario logueado');
     }
     
     // Redirect to home page
+    
     window.location.href = "/";
   };
 
@@ -56,6 +90,7 @@ function FormularioLogin() {
                 <div className="form-group mb-4">
                   <Form.Control type="password" placeholder="Contraseña" required id='password' />
                   {registrando && <Form.Control className='mt-4' type="text" placeholder="Nombre" id='name' />}
+                  {registrando && <Form.Control className='mt-4' type="text" placeholder="Apellido" id='surname' />}
                   {registrando && <Form.Control className='mt-4' type="phone" placeholder="Teléfono" id='phone' />}
                   <span className="fa fa-fw fa-eye field-icon toggle-password" />
                   <div className="text-md-end mt-2">
