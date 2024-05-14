@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import app from './firebase/config';
 import Header from './components/Header';
 import FormularioLogin from './pages/FormularioLogin';
+import Corte from './components/Corte';
 import About from './components/About';
 import Carrusel from './components/Carrusel';
 import Equipo from './components/Equipo';
@@ -30,25 +31,20 @@ function App() {
     <React.StrictMode>
       <BrowserRouter>
         <Routes>
-          {usuario ? (
-            <Route
-              path="/"
-              element={
-                <>
-                  <Header correoUsuario={usuario.email}/>
-                  <About />
-                  <Carrusel />
-                  <Equipo />
-                  <Footer />
-                </>
-              }
-            />
-          ) : (
-            <Route
-              path="/"
-              element={<FormularioLogin />}
-            />
-          )}
+          <Route
+            path="/"
+            element={
+              <>
+                <Header correoUsuario={usuario !== null ? usuario.email : null} />
+                <About />
+                <Carrusel />
+                <Equipo />
+                <Footer />
+              </>
+            }
+          />
+          <Route path="/login" element={<FormularioLogin />} />
+          <Route path="/corte" element={<Corte/>} />
         </Routes>
       </BrowserRouter>
     </React.StrictMode>

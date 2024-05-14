@@ -20,14 +20,16 @@ function FormularioLogin() {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    if(registrando) {
+    if (registrando) {
       await createUserWithEmailAndPassword(auth, email, password);
       console.log('Usuario creado');
-    }
-    else{
+    } else {
       await signInWithEmailAndPassword(auth, email, password);
       console.log('Usuario logueado');
     }
+    
+    // Redirect to home page
+    window.location.href = "/";
   };
 
   return (

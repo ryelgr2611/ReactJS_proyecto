@@ -29,15 +29,15 @@ function Header({correoUsuario}) {
           <Nav className="me-auto my-2 my-lg-0 mx-auto  " navbarScroll>
             <Nav.Link as={Link} to="/about">Sobre Nosotros</Nav.Link>
             <NavDropdown title="Servicios" id="navbarScrollingDropdown">
-              <NavDropdown.Item as={Link} to="/service1" className='text-center '>Corte de Pelo</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/service2" className='text-center '>Tinte</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/corte" className='text-center '>Corte de Pelo</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/tinte" className='text-center '>Tinte</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item as={Link} to="/service3" className='text-center '>Barba</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/barba" className='text-center '>Barba</NavDropdown.Item>
             </NavDropdown>
             <Nav.Link as={Link} to="/contact">Contacto</Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link as={Link} to="/login">{correoUsuario ?  correoUsuario : <LuLogIn /> +"Iniciar Sesión"} </Nav.Link>
+            <Nav.Link as={Link} to="/login">{correoUsuario ?  correoUsuario : <><LuLogIn /> Iniciar Sesión</>}</Nav.Link>
             <Nav.Link as={Link} onClick={() => signOut(auth)}>{correoUsuario ? <LuLogOut /> : "" } </Nav.Link>
           </Nav>
         </Navbar.Collapse>

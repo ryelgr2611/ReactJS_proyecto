@@ -21,6 +21,11 @@
     text-shadow: 2px 2px #ffffff;
   }
   
+  .menu
+  {
+    padding: 0;
+  }
+  
   .footer .social-icon {
     display: flex;
     justify-content: center;

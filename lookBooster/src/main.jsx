@@ -10,9 +10,9 @@ import Carrusel from './components/Carrusel';
 import Equipo from './components/Equipo';
 import Footer from './components/Footer';
 import { onAuthStateChanged } from 'firebase/auth';
-import App from './App';
+import Home from './Home';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <App />
+  <Home />
 );
