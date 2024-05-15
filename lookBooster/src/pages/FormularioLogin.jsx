@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { FaGoogle, FaApple } from "react-icons/fa";
 import app from '../firebase/config';
 import 'firebase/auth';
-import { getAuth } from 'firebase/auth'; // Add this import statement
+import { getAuth,sendPasswordResetEmail } from 'firebase/auth'; // Add this import statement
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'; // Add this import statement
 import { db } from '../firebase/config';
 import { collection, addDoc, getDocs } from 'firebase/firestore'; 
@@ -20,6 +20,20 @@ const dbEmpleados = collection(db, 'empleados');
 
 
 function FormularioLogin() {
+
+  const resetPassword = (email) => {
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        // Password reset email sent!
+        // Handle success case here
+      })
+      .catch((error) => {
+        const errorCode = error.code; 
+        const errorMessage = error.message;
+        // ..
+      });
+  };
+
   const [registrando, setRegistrando] = useState(false);
   const [userId, setUserId] = useState('');
 
@@ -28,26 +42,22 @@ function FormularioLogin() {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    const name = e.target.name.value;
-    const surname = e.target.surname.value;
-    const phone = e.target.phone.value;
     let userId ;
-
-    
-
     
     if (registrando) {
+      const name = e.target.name.value;
+      const surname = e.target.surname.value;
+      const phone = e.target.phone.value;
       await createUserWithEmailAndPassword(auth, email, password);
       userId = auth.currentUser.uid;
       const usuario={
         id: userId,
         correo: email,
-        contraseña: password,
         nombre: name,
         apellido: surname,
         telefono: phone
       }
-        if (email.includes('@lookbooster')) {
+        if (email.includes('.lookbooster')) {
           await addDoc(dbEmpleados, usuario);
                 
           console.log('Empleado registrado');
@@ -63,7 +73,7 @@ function FormularioLogin() {
     
     // Redirect to home page
     
-    window.location.href = "/";
+    window.history.back();
   };
 
   return (
@@ -94,7 +104,7 @@ function FormularioLogin() {
                   {registrando && <Form.Control className='mt-4' type="phone" placeholder="Teléfono" id='phone' />}
                   <span className="fa fa-fw fa-eye field-icon toggle-password" />
                   <div className="text-md-end mt-2">
-                  {!registrando && <a href="#">Olvidé la contraseña</a>}
+                  {!registrando && <a href="#" onClick={() => ResetPassAsync(document.getElementById('email').value)}>Olvidé la contraseña</a>}
                   </div>
                 </div>
                 <div className="form-group mt-3">

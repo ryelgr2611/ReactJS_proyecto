@@ -31,6 +31,7 @@ function Carrusel(props) {
   };
 
   return (
+    
     <Carousel
       swipeable={true}
       draggable={false}

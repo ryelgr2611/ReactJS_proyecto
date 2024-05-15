@@ -8,6 +8,7 @@ import app from './firebase/config';
 import Header from './components/Header';
 import FormularioLogin from './pages/FormularioLogin';
 import Corte from './components/Corte';
+import Citas from './components/Citas';
 import About from './components/About';
 import Carrusel from './components/Carrusel';
 import Equipo from './components/Equipo';
@@ -45,6 +46,8 @@ function App() {
           />
           <Route path="/login" element={<FormularioLogin />} />
           <Route path="/corte" element={<Corte/>} />
+          <Route path="/citas" element={<Citas/>} />
+
         </Routes>
       </BrowserRouter>
     </React.StrictMode>
