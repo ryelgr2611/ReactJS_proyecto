@@ -1,0 +1,49 @@
+.react-calendar {
+    
+    border-color: #2d5588ff;
+}
+
+.react-calendar__month-view__days__day {
+    
+    border: 1px;
+    margin-top: 7px;
+    border-radius: 25px;
+}
+
+
+.react-calendar__tile--active {
+    background-color: #ddca8fff;
+    color: #2d5588ff;
+
+}
+
+.selected-day {
+    background-color: #2d5588ff;
+    color: #fefefeff;
+}
+.react-calendar__month-view__weekdays__weekday {
+    color: #2d5588ff;
+    margin-top: 15px;
+}
+
+
+.react-calendar__tile--active:hover {
+    background-color: #2d5588ff;
+    color: #fefefeff;
+}
+
+.selected-day:hover {
+    background-color: #ddca8fff;
+    color: #2d5588ff;
+}
+.react-calendar__month-view__weekdays__weekday:hover {
+    background-color: #9f815fff;
+    color: #fefefeff;
+}
+.citasOffCanva{
+    background-color: rgba(45, 84, 136, 0.849);
+    color: white;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
