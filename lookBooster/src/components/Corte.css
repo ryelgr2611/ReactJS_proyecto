@@ -1,0 +1,89 @@
+#cartaCorte {
+    transition: transform .2s; /* Animación */
+}
+
+#cartaCorte:hover {
+    transform: scale(1.1); /* Zoom al hacer hover */
+}
+
+#tituloCorte{
+    color: #2d5588ff !important; /* Color del título */
+}
+
+.review {
+    background: #fefefeff;
+    padding: 1.5rem 2rem;
+    border-radius: 0.25rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s linear;
+    text-align: center;
+}
+.review:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+.img-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 0 auto;
+    margin-bottom: 1.5rem;
+}
+.person-img {
+    width: 100%;
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    position: relative;
+}
+.quote-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    transform: translateY(25%);
+    background: #2d5588ff;
+    color: #fefefeff;
+}
+.img-container::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    background: #2d5588ff;
+    position: absolute;
+    top: -0.25rem;
+    right: -0.5rem;
+    border-radius: 50%;
+}
+.author {
+    margin-bottom: 0.25rem;
+}
+.job {
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    color: #d34f4aff;
+    font-size: 0.85rem;
+}
+.info {
+    margin-bottom: 0.75rem;
+    color: #6e5a42    ;
+}
+.prev-btn,
+.next-btn {
+    color: #ddca8fff;
+    font-size: 1.25rem;
+    background: transparent;
+    border-color: transparent;
+    margin: 0 0.5rem;
+    transition: all 0.3s linear;
+    cursor: pointer;
+}
+.prev-btn:hover,
+.next-btn:hover {
+    color: #2d5588ff;
+}

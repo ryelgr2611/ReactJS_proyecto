@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './Equipo.css'
 import Raul from '../assets/raul.jpeg'
+import tp1 from '../assets/tp1.jpg'
 
 
 function Equipo() {
@@ -16,7 +17,7 @@ return (
                               <p>|</p>
                               <Link className="textos textoLink" to="/team/sierra">Leer más</Link>
                        </div>
-                       <img className="imgEquipo brightness-80" src={Raul}></img>
+                       <img className="imgEquipo brightness-80" src={tp1}></img>
                     </div>
                     <div className="position-relative">
                     <div className="position-absolute z-1 py-4 d-flex justify-content-center gap-2 w-100">
@@ -26,7 +27,7 @@ return (
                               <p>|</p>
                               <Link className="textos textoLink" to="/team/billy">Leer más</Link>
                        </div>
-                       <img className="imgEquipo brightness-80" src={Raul}></img>
+                       <img className="imgEquipo brightness-80" src={tp1}></img>
                     </div>
                     <div className="position-relative">
                     <div className="position-absolute z-1 py-4 d-flex justify-content-center gap-2 w-100">
@@ -34,9 +35,9 @@ return (
                               <p>|</p>
                               <p className="textos font-weight-bold text-white">Web Developer</p>
                               <p>|</p>
-                              <Link className="textos textoLink" to="/team/raul">Leer más</Link>
+                              <Link className="textos textoLink" to="/team/tp1">Leer más</Link>
                        </div>
-                          <img className="imgEquipo brightness-80" src={Raul}></img>
+                          <img className="imgEquipo brightness-80" src={tp1}></img>
                           
                     </div>
            </section>

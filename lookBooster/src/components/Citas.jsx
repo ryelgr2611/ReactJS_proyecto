@@ -32,6 +32,7 @@ function Citas() {
     const [selectedTime, setSelectedTime] = useState("");
     const [selectedDay, setSelectedDay] = useState(null);
     const [showOffcanvas, setShowOffcanvas] = useState(false);
+    const [citasEmpleado, setCitasEmpleado] = useState([]);
 
     const hours = [];
     const now = new Date();
@@ -39,14 +40,37 @@ function Citas() {
     const currentMinutes = now.getMinutes();
 
     for (let i = 9; i <= 19; i++) {
+        if (i === 14 || i === 15) continue;
         if (removeTimeFromDate(selectedFecha) === removeTimeFromDate(now)) {
             if (i > currentHour || (i === currentHour && currentMinutes < 30)) {
-                hours.push(i);
+                if (!citasEmpleado.some(cita => cita.hora.startsWith(i.toString()))) {
+                    hours.push(i);
+                }
             }
         } else {
-            hours.push(i);
+            if (!citasEmpleado.some(cita => cita.hora.startsWith(i.toString()))) {
+                hours.push(i);
+            }
         }
     }
+
+    useEffect(() => {
+        const obtenerCitasEmpleado = async () => {
+            try {
+                const citasRef = collection(db, 'citas');
+                const snapshot = await getDocs(citasRef);
+                const citasData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                const citasEmpleado = citasData.filter(cita => cita.empleadoId === selectedEmpleado && cita.fecha === removeTimeFromDate(selectedFecha));
+                setCitasEmpleado(citasEmpleado);
+            } catch (error) {
+                console.error('Error al obtener las citas del empleado', error);
+            }
+        };
+    
+        if (selectedEmpleado) {
+            obtenerCitasEmpleado();
+        }
+    }, [selectedEmpleado, selectedFecha]);
 
     useEffect(() => {
         onAuthStateChanged(auth, (usuarioAuth) => {
@@ -90,6 +114,9 @@ function Citas() {
             const citasRef = collection(db, 'citas');
             await addDoc(citasRef, cita);
             setShowOffcanvas(true);
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
         } catch (error) {
             console.error('Error al crear la cita', error);
         }
@@ -128,7 +155,7 @@ function Citas() {
                             <option value="Barba">Barba</option>
                         </select>
                     </div>
-                    <div className="d-flex gap-2 flex-column w-25 mx-auto mt-3">
+                    <div className="d-flex gap-2 flex-column mx-auto mt-3">
                     <Calendar 
                         onChange={(value) => { setSelectedFecha(value); setSelectedDay(value); }} 
                         value={selectedFecha} 
@@ -144,12 +171,11 @@ function Citas() {
                     </div>
                     <div className="d-flex flex-column w-50 mx-auto mt-3"> 
                         <div className="font-bold">Hora</div>
-                        <select value={selectedTime} onChange={(e) => setSelectedTime(e.target.value)} className='w-25 mx-auto mt-1 '>
+                        <select value={selectedTime} onChange={(e) => setSelectedTime(e.target.value)} className=' mx-auto mt-1 '>
                             <option value="" disabled>Seleccione hora</option>
                             {hours.map((hour) => (
                                 <React.Fragment key={hour}>
                                     <option value={`${hour}:00`}>{`${hour}:00`}</option>
-                                    <option value={`${hour}:30`}>{`${hour}:30`}</option>
                                 </React.Fragment>
                             ))}
                         </select>

@@ -12,6 +12,7 @@ import Citas from './components/Citas';
 import About from './components/About';
 import Carrusel from './components/Carrusel';
 import Equipo from './components/Equipo';
+import Perfil from './components/Perfil';
 import Footer from './components/Footer';
 import 'firebase/auth';
 import { onAuthStateChanged, getAuth } from 'firebase/auth';
@@ -28,6 +29,7 @@ function App() {
       setUsuario(null);
     }
   });
+  
   return (
     <React.StrictMode>
       <BrowserRouter>
@@ -47,6 +49,7 @@ function App() {
           <Route path="/login" element={<FormularioLogin />} />
           <Route path="/corte" element={<Corte/>} />
           <Route path="/citas" element={<Citas/>} />
+          <Route path="/perfil" element={<Perfil/>} />
 
         </Routes>
       </BrowserRouter>
