@@ -8,6 +8,7 @@
     text-shadow: 2px 2px 4px rgb(255, 255, 255);
     color: #2d5588ff;
     transition: text-shadow 0.5s ease, color 0.5s ease;
+    cursor: pointer;
 }
 
 .brightness-80 {
@@ -17,4 +18,8 @@
     object-fit: cover;
     width: 100%;
     border-radius: 8px;
+    background-color: black;
+}
+.imgEquipo-black {
+    filter: brightness(0.2);
 }

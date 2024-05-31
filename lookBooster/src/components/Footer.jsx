@@ -21,7 +21,7 @@ function Footer() {
                     <Col xs={12} sm={6} md={3}>
                         <h3>Servicios</h3>
                         <ul className="menu">
-                            <li className="menu-item mb-2"><Link className="menu-link" to="#">Corte de pelo</Link></li>
+                            <li className="menu-item mb-2"><Link className="menu-link" to="/corte">Corte de pelo</Link></li>
                             <li className="menu-item mb-2"><Link className="menu-link" to="#">Tinte</Link></li>
                             <li className="menu-item mb-2"><Link className="menu-link" to="#">Barba</Link></li>
                         </ul>
@@ -30,16 +30,16 @@ function Footer() {
                         <h3>Otros Enlaces</h3>
                         <ul className="menu">
                             <li className="menu-item mb-2"><Link className="menu-link" to="#">Proveedores</Link></li>
-                            <li className="menu-item mb-2"><Link className="menu-link" to="#">Encuesta de satisfación</Link></li>
+                            <li className="menu-item mb-2"><Link className="menu-link" to="#">Política de privacidad</Link></li>
                             <li className="menu-item mb-2"><Link className="menu-link" to="#">Política de cookies</Link></li>
                         </ul>
                     </Col>
                     <Col xs={12} sm={6} md={3}>
-                        <h3>Formas de Pago</h3>
+                        <h3>Preguntas frecuentes</h3>
                         <ul className="menu">
-                            <li className="menu-item mb-2"><FaCreditCard /><Link className="menu-link" to="#"> Tarjeta de Crédito</Link></li>
-                            <li className="menu-item mb-2"><FaPaypal /><Link className="menu-link" to="#">PayPal</Link></li>
-                            <li className="menu-item mb-2"><BsBank2 /> <Link className="menu-link" to="#">Transferencia</Link></li>
+                            <li className="menu-item mb-2"><Link className="menu-link" to="#">¿Trabajar con vosotros?</Link></li>
+                            <li className="menu-item mb-2"><Link className="menu-link" to="#">¿Puedo cancelar mi cita?</Link></li>
+                            <li className="menu-item mb-2"><Link className="menu-link" to="#">¿Necesito tener cuenta para pedir mi cita?</Link></li>
                         </ul>
                     </Col>
                 </Row>

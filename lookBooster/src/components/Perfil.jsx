@@ -94,6 +94,7 @@ function Perfil() {
             if (usuario) {
                 let coleccion = usuario.email.includes('lookbooster') ? 'empleados' : 'clientes';
                 console.log(coleccion);
+                
                 try {
                     const usuarioRef = collection(db, coleccion);
                     const snapshot = await getDocs(usuarioRef);
@@ -215,7 +216,7 @@ function Perfil() {
                                             <div key={index}>
                                                 <h2>{cita.fecha}, a las {cita.hora}</h2>
                                                 <h2>Con el barbero: <strong>{empleado ? empleado.nombre : 'Empleado no encontrado'}</strong></h2>
-                                                <p>{cita.servicio}</p>
+                                                <p>{cita.servicio }</p>
                                                 <hr />
                                             </div>
                                         );

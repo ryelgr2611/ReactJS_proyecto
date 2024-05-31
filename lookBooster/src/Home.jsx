@@ -10,6 +10,7 @@ import FormularioLogin from './pages/FormularioLogin';
 import Corte from './components/Corte';
 import Citas from './components/Citas';
 import About from './components/About';
+import Sobre from './components/Sobre';
 import Carrusel from './components/Carrusel';
 import Equipo from './components/Equipo';
 import Perfil from './components/Perfil';
@@ -50,6 +51,8 @@ function App() {
           <Route path="/corte" element={<Corte/>} />
           <Route path="/citas" element={<Citas/>} />
           <Route path="/perfil" element={<Perfil/>} />
+          <Route path="/sobre" element={<Sobre/>} />
+
 
         </Routes>
       </BrowserRouter>

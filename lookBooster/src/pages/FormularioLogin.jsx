@@ -21,19 +21,6 @@ const dbEmpleados = collection(db, 'empleados');
 
 function FormularioLogin() {
 
-  const resetPassword = (email) => {
-    sendPasswordResetEmail(auth, email)
-      .then(() => {
-        // Password reset email sent!
-        // Handle success case here
-      })
-      .catch((error) => {
-        const errorCode = error.code; 
-        const errorMessage = error.message;
-        // ..
-      });
-  };
-
   const [registrando, setRegistrando] = useState(false);
   const [userId, setUserId] = useState('');
 

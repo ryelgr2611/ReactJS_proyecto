@@ -1,0 +1,36 @@
+.rotate-90{
+    transform: rotate(90deg);
+    top: 42%;
+    left: -0.9em;
+    display: block;
+}
+.textoHistoria{
+    font-size: 1.5rem;
+    text-align: justify;
+
+}
+.contHistoria{
+    background-color: rgba(221, 202, 143, 0.651);
+}
+@media (max-width: 900px) {
+  .display-4 {
+    font-size: 4rem; /* Ajusta este valor según tus necesidades */
+  }
+  .rotate-90{
+      top: 45%;
+}
+    .textoHistoria{
+        font-size: 1.2rem;
+    }
+}
+@media (max-width: 500px) {
+    .display-4 {
+      font-size: 5rem; /* Ajusta este valor según tus necesidades */
+    }
+    .rotate-90{
+        left: -1.1em;
+      }
+      .textoHistoria{
+          font-size: 1rem;
+      }
+}

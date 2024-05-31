@@ -47,3 +47,42 @@
     justify-content: center;
     text-align: center;
 }
+.contHoras{
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 1fr 1fr 1fr 1fr ;
+    gap: 10px;
+    width: 40%;
+}
+.btnHoras{
+    background-color: #2d5588ff;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+}
+.btnHoras:hover{
+    background-color: #ddca8fff;
+    color: rgb(0, 0, 0);
+}
+.btnHoras:focus{
+    outline: none;
+    background-color: #d34f4aff;
+}
+.btnHoras:disabled{
+    background-color: rgb(83, 83, 83);
+}
+
+@media screen and (max-width: 1200px){
+    .contHoras{
+        width: 80%;
+    }
+    
+}
+@media screen and (max-width: 700px){
+    .contHoras{
+        grid-template-columns: 1fr 1fr;
+    }
+    
+}

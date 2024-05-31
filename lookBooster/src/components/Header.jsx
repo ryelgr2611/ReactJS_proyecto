@@ -13,7 +13,7 @@ const auth = getAuth(app);
 
 function Header({correoUsuario}) {
   return (
-    <Navbar expand="lg" className="fs-3 sticky-top ">
+    <Navbar expand="lg" className="fs-3 sticky-top">
       <Container fluid>
         <Navbar.Brand as={Link} to="/">
           <img
@@ -27,7 +27,7 @@ function Header({correoUsuario}) {
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll" className="">
           <Nav className="me-auto my-2 my-lg-0 mx-auto  " navbarScroll>
-            <Nav.Link as={Link} to="/about">Sobre Nosotros</Nav.Link>
+            <Nav.Link as={Link} to="/sobre">Sobre Nosotros</Nav.Link>
             <NavDropdown title="Servicios" id="navbarScrollingDropdown">
               <NavDropdown.Item as={Link} to="/corte" className='text-center '>Corte de Pelo</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/tinte" className='text-center '>Tinte</NavDropdown.Item>
