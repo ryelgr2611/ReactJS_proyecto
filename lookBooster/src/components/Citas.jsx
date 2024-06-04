@@ -27,13 +27,13 @@ function Citas() {
     const [usuario, setUsuario] = useState(null);
     const [empleados, setEmpleados] = useState([]);
     const [selectedEmpleado, setSelectedEmpleado] = useState("");
-    const [selectedServicio, setSelectedServicio] = useState("");
     const [selectedTime, setSelectedTime] = useState("");
     const [selectedDay, setSelectedDay] = useState(null);
     const [showOffcanvas, setShowOffcanvas] = useState(false);
     const [citasEmpleado, setCitasEmpleado] = useState([]);
     const [selectedServicios, setSelectedServicios] = useState([]);
     const [totalDuration, setTotalDuration] = useState(0);
+    const [observaciones, setObservaciones] = useState('');
 
     // Definir los servicios y su duración
     const servicios = {
@@ -243,6 +243,12 @@ function Citas() {
                             ))}
                         </div>
                     </div>
+                    <textarea
+                    className="form-control w-50 mx-auto"
+                    value={observaciones}
+                    onChange={(e) => setObservaciones(e.target.value)}
+                    placeholder="Indica el tipo de corte de pelo, barba y tinte que deseas"
+                    />
                     <div className="">
                         <div className="font-bold mt-3">Hora</div>
                         <div className="contHoras mx-auto mt-3">
@@ -255,7 +261,7 @@ function Citas() {
                     </div>
                 </div>
 
-                <div className="d-flex flex-column gap-2 mt-2 text-center mx-auto">
+                <div className="d-flex flex-column gap-2 mt-2 text-center mx-auto mb-2">
                     <button className="px-4 py-2" type="submit">Confirmar</button>
                 </div>
             </form>

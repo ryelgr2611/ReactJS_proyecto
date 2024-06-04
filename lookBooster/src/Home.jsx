@@ -8,6 +8,8 @@ import app from './firebase/config';
 import Header from './components/Header';
 import FormularioLogin from './pages/FormularioLogin';
 import Corte from './components/Corte';
+import Barba from './components/Tinte';
+import Tinte from './components/Tinte';
 import Citas from './components/Citas';
 import About from './components/About';
 import Sobre from './components/Sobre';
@@ -49,6 +51,8 @@ function App() {
           />
           <Route path="/login" element={<FormularioLogin />} />
           <Route path="/corte" element={<Corte/>} />
+          <Route path="/barba" element={<Barba/>} />
+          <Route path="/tinte" element={<Tinte/>} />
           <Route path="/citas" element={<Citas/>} />
           <Route path="/perfil" element={<Perfil/>} />
           <Route path="/sobre" element={<Sobre/>} />

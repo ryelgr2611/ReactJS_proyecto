@@ -10,6 +10,8 @@ import { getAuth,sendPasswordResetEmail } from 'firebase/auth'; // Add this impo
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'; // Add this import statement
 import { db } from '../firebase/config';
 import { collection, addDoc, getDocs } from 'firebase/firestore'; 
+import { BsEye, BsEyeSlash } from "react-icons/bs";
+
 
 const auth = getAuth(app);
 const dbClientes = collection(db, 'clientes');
@@ -23,6 +25,11 @@ function FormularioLogin() {
 
   const [registrando, setRegistrando] = useState(false);
   const [userId, setUserId] = useState('');
+  const[revealed, setRevealed]= useState(false);
+
+  const handleReveal = () => {
+    setRevealed(!revealed);
+};
 
   const iniciarSesion = async (e) => {
     
@@ -85,7 +92,18 @@ function FormularioLogin() {
                   <Form.Control type="text" placeholder="Correo Electrónico" required id='email'/>
                 </div>
                 <div className="form-group mb-4">
-                  <Form.Control type="password" placeholder="Contraseña" required id='password' />
+                <div className="password-wrapper">
+    <Form.Control 
+        type={revealed ? "text" : "password"} 
+        placeholder="Contraseña" 
+        required 
+        id='password' 
+        className="password-input"
+    />
+    <div className="password-icon" onClick={handleReveal}>
+        {revealed ? <BsEyeSlash /> : <BsEye />}
+    </div>
+</div>
                   {registrando && <Form.Control className='mt-4' type="text" placeholder="Nombre" id='name' />}
                   {registrando && <Form.Control className='mt-4' type="text" placeholder="Apellido" id='surname' />}
                   {registrando && <Form.Control className='mt-4' type="phone" placeholder="Teléfono" id='phone' />}

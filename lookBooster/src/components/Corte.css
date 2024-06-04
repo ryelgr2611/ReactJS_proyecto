@@ -3,13 +3,19 @@
 }
 
 #cartaCorte:hover {
-    transform: scale(1.1); /* Zoom al hacer hover */
+    transform: scale(1.05); /* Zoom al hacer hover */
 }
 
 #tituloCorte{
     color: #2d5588ff !important; /* Color del título */
 }
 
+.imgServ{
+
+    object-fit: cover;
+    border-radius: 8px;
+    background-color: black;
+}
 .review {
     background: #fefefeff;
     padding: 1.5rem 2rem;
@@ -87,3 +93,44 @@
 .next-btn:hover {
     color: #2d5588ff;
 }
+.btnCita {
+    padding: 1.1em 2em;
+    background: none;
+    border: 2px solid #fff;
+    font-size: 15px;
+    color: #131313;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+    border-radius: 12px;
+    background-color: #fefefeff;
+    font-weight: bolder;
+    box-shadow: 0 2px 0 2px #000;
+   }
+   
+   .btnCita:before {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 120%;
+    background-color: #0d3b66;
+    top: 50%;
+    transform: skewX(30deg) translate(-150%, -50%);
+    transition: all 0.5s;
+   }
+   
+   .btnCita:hover {
+    background-color: #d34f4aff;
+    color: #fff;
+    box-shadow: 0 2px 0 2px #0d3b66;
+   }
+   
+   .btnCita:hover::before {
+    transform: skewX(30deg) translate(150%, -50%);
+    transition-delay: 0.1s;
+   }
+   
+   .btnCita:active {
+    transform: scale(0.9);
+   }
