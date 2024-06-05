@@ -13,7 +13,7 @@ function Footer() {
                     <Col xs={12} sm={6} md={3}>
                         <h3>Inicio</h3>
                         <ul className="menu">
-                            <li className="menu-item mb-2"><Link className="menu-link" to="about">Sobre Nosotros</Link></li>
+                            <li className="menu-item mb-2"><Link className="menu-link" to="/sobre">Sobre Nosotros</Link></li>
                             
                             <li className="menu-item mb-2"><Link className="menu-link" to="contacto">Contacto</Link></li>
                         </ul>
@@ -22,8 +22,8 @@ function Footer() {
                         <h3>Servicios</h3>
                         <ul className="menu">
                             <li className="menu-item mb-2"><Link className="menu-link" to="/corte">Corte de pelo</Link></li>
-                            <li className="menu-item mb-2"><Link className="menu-link" to="#">Tinte</Link></li>
-                            <li className="menu-item mb-2"><Link className="menu-link" to="#">Barba</Link></li>
+                            <li className="menu-item mb-2"><Link className="menu-link" to="/tinte">Tinte</Link></li>
+                            <li className="menu-item mb-2"><Link className="menu-link" to="/barba">Barba</Link></li>
                         </ul>
                     </Col>
                     <Col xs={12} sm={6} md={3}>

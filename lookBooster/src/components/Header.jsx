@@ -37,7 +37,7 @@ function Header({correoUsuario}) {
             <Nav.Link as={Link} to="/contact">Contacto</Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link as={Link} to={correoUsuario ? "/perfil" : "/login"}>{correoUsuario ?  correoUsuario : <><LuLogIn /> Iniciar Sesión</>}</Nav.Link>
+            <Nav.Link as={Link} to={correoUsuario ? "/perfil" : "/login"}>{correoUsuario ?  "Hola, "+correoUsuario : <><LuLogIn /> Iniciar Sesión</>}</Nav.Link>
             <Nav.Link as={Link} onClick={() => signOut(auth)}>{correoUsuario ? <LuLogOut /> : "" } </Nav.Link>
           </Nav>
         </Navbar.Collapse>

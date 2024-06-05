@@ -4,11 +4,12 @@ import app from '../firebase/config';
 import 'firebase/auth';
 import Header from './Header';
 import { db } from '../firebase/config';
-import { collection, getDocs, addDoc } from 'firebase/firestore';
+import { collection, getDocs, addDoc, deleteDoc, doc } from 'firebase/firestore';
 import { TbArrowBadgeDown } from "react-icons/tb";
 import Calendar from 'react-calendar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import './Citas.css';
+
 
 function removeTimeFromDate(date) {
     let year = date.getFullYear();
@@ -113,6 +114,9 @@ function Citas() {
             setSelectedServicios((prevServicios) => prevServicios.filter((s) => s !== servicio));
         }
     };
+    const handleObservacionesChange = (event) => {
+        setObservaciones(event.target.value);
+    };
 
     useEffect(() => {
         calculateTotalDuration();
@@ -170,6 +174,7 @@ function Citas() {
             clienteId: usuario.uid,
             empleadoId: selectedEmpleado,
             servicio: selectedServicios.join(', '),
+            observaciones: observaciones,
             fecha: removeTimeFromDate(selectedDay),
             hora: selectedTime,
         };
@@ -186,6 +191,33 @@ function Citas() {
             console.error('Error al crear la cita', error);
         }
     };
+    const eliminarCitasAntiguas = async () => {
+        try {
+            const citasRef = collection(db, 'citas');
+            const snapshot = await getDocs(citasRef);
+            const citasData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            const hoy = new Date();
+            hoy.setDate(hoy.getDate() - 1); 
+            const fechaActual = removeTimeFromDate(hoy);
+    
+            const citasAEliminar = citasData.filter(cita => {
+                const [day, month, year] = cita.fecha.split('-');
+                const fechaCita = new Date(`${year}-${month}-${day}`);
+                return fechaCita <= hoy;
+            });
+    
+            const deletePromises = citasAEliminar.map(cita => deleteDoc(doc(db, 'citas', cita.id)));
+            await Promise.all(deletePromises);
+    
+            console.log('Citas antiguas eliminadas');
+        } catch (error) {
+            console.error('Error al eliminar citas antiguas', error);
+        }
+    };
+
+    useEffect(() => {
+        eliminarCitasAntiguas();
+    }, []);
 
     return (
         <div>

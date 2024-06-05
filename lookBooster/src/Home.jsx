@@ -8,7 +8,7 @@ import app from './firebase/config';
 import Header from './components/Header';
 import FormularioLogin from './pages/FormularioLogin';
 import Corte from './components/Corte';
-import Barba from './components/Tinte';
+import Barba from './components/Barba';
 import Tinte from './components/Tinte';
 import Citas from './components/Citas';
 import About from './components/About';
@@ -16,6 +16,7 @@ import Sobre from './components/Sobre';
 import Carrusel from './components/Carrusel';
 import Equipo from './components/Equipo';
 import Perfil from './components/Perfil';
+import Opinion from './components/Opinion';
 import Footer from './components/Footer';
 import 'firebase/auth';
 import { onAuthStateChanged, getAuth } from 'firebase/auth';
@@ -45,6 +46,7 @@ function App() {
                 <About />
                 <Carrusel />
                 <Equipo />
+                <Opinion />
                 <Footer />
               </>
             }

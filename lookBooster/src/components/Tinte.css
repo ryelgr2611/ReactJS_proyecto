@@ -1,11 +1,11 @@
-.container {
+#containerTinte {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
   }
   
-  .container .glass {
+  #containerTinte .glass {
     position: relative;
     width: 280px;
     height: 280px;
@@ -22,20 +22,32 @@
     transform: rotate(calc(var(--r) * 1deg));
   }
   
-  .container:hover .glass {
+  #containerTinte:hover .glass {
     transform: rotate(0deg);
     margin: 0 10px;
   }
+  #containerTinte .glass::before {
+    content: attr(data-text);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.699);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000000;
+  }
 
   @media (max-width: 1000px) {
-    .container .glass {
+    #containerTinte .glass {
       width: 153px;
       height: 153px;
     }
     
   }
   @media (max-width: 600px) {
-    .container .glass {
+    #containerTinte .glass {
       width: 130px;
       height: 130px;
     }

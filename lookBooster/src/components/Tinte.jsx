@@ -1,11 +1,8 @@
 import React from 'react';
 import Header from './Header';
-import Carrusel from './Carrusel';
 import app from '../firebase/config';
-import { FaChevronLeft, FaChevronRight, FaQuoteRight } from "react-icons/fa";
 import { onAuthStateChanged,getAuth,signOut } from 'firebase/auth';
 import { useState, useEffect } from 'react';
-import { Container, Image, Col } from 'react-bootstrap';
 import Tinte1 from '../assets/tinte1.jpg';
 import Tinte2 from '../assets/tinte2.jpg';
 import Tinte3 from '../assets/tinte3.jpg';
@@ -31,22 +28,6 @@ function Tinte(){
         });
     }, []);
 
-    const opiniones = [
-        // Agrega aquí las opiniones de los clientes sobre el tinte
-    ];
-
-    const [indiceActual, setIndiceActual] = useState(0);
-
-    const prevOpinion = () => {
-        setIndiceActual(indiceActual === 0 ? opiniones.length - 1 : indiceActual - 1);
-    };
-
-    const nextOpinion = () => {
-        setIndiceActual(indiceActual === opiniones.length - 1 ? 0 : indiceActual + 1);
-    };
-
-    const opinionActual = opiniones[indiceActual];
-
     return (
         <div>
             <Header correoUsuario={usuario !== null ? usuario.email : null} />
@@ -66,14 +47,14 @@ function Tinte(){
                 </div>
             </section>
             <br />
-            <div className="container mb-5 mt-5">
-                <div data-text="" style={{ '--r': '-15' }} className="glass">
+            <div className="container mb-5 mt-5" id='containerTinte'>
+                <div data-text="Tinte Unicolor 20€" style={{ '--r': '-15' }} className="glass">
                     <img src={Tinte1} alt="" className='w-100'/>
                 </div>
-                <div data-text="Code" style={{ '--r': '5' }} className="glass">
+                <div data-text="Tinte Bicolor 30€" style={{ '--r': '5' }} className="glass">
                     <img src={Tinte2} alt="" className='w-100'/>
                 </div>
-                <div data-text="Earn" style={{ '--r': '25' }} className="glass">
+                <div data-text="Reflejos 15€" style={{ '--r': '25' }} className="glass">
                     <img src={Tinte3} alt="" className='w-100'/>
                 </div>
             </div>

@@ -57,7 +57,7 @@ return (
                         <div className="position-absolute z-1 py-4 d-flex justify-content-center gap-2 w-100">
                               <p className="textos font-weight-bold text-white">Álex</p>
                               <p>|</p>
-                              <p className="textos font-weight-bold text-white">Owner</p>
+                              <p className="textos font-weight-bold text-white">Owner & Barber</p>
                               <p>|</p>
                               <a className="textos textoLink" onClick={handleClick2}>Leer más</a>
                         </div>

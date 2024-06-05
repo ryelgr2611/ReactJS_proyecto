@@ -13,6 +13,7 @@ import { collection, addDoc, getDocs } from 'firebase/firestore';
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 
 
+
 const auth = getAuth(app);
 const dbClientes = collection(db, 'clientes');
 // getDocs(dbClientes)
@@ -36,6 +37,15 @@ function FormularioLogin() {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
+
+    // Validación de correo electrónico
+    if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(email)) {
+      alert("Por favor, introduce un correo electrónico válido.");
+      return;
+    }
+
+
+    
     let userId ;
     
     if (registrando) {
@@ -93,17 +103,17 @@ function FormularioLogin() {
                 </div>
                 <div className="form-group mb-4">
                 <div className="password-wrapper">
-    <Form.Control 
-        type={revealed ? "text" : "password"} 
-        placeholder="Contraseña" 
-        required 
-        id='password' 
-        className="password-input"
-    />
-    <div className="password-icon" onClick={handleReveal}>
-        {revealed ? <BsEyeSlash /> : <BsEye />}
-    </div>
-</div>
+                    <Form.Control 
+                        type={revealed ? "text" : "password"} 
+                        placeholder="Contraseña" 
+                        required 
+                        id='password' 
+                        className="password-input"
+                    />
+                    <div className="password-icon" onClick={handleReveal}>
+                        {revealed ? <BsEyeSlash /> : <BsEye />}
+                    </div>
+                </div>
                   {registrando && <Form.Control className='mt-4' type="text" placeholder="Nombre" id='name' />}
                   {registrando && <Form.Control className='mt-4' type="text" placeholder="Apellido" id='surname' />}
                   {registrando && <Form.Control className='mt-4' type="phone" placeholder="Teléfono" id='phone' />}
