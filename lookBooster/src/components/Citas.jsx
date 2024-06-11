@@ -31,10 +31,12 @@ function Citas() {
     const [selectedTime, setSelectedTime] = useState("");
     const [selectedDay, setSelectedDay] = useState(null);
     const [showOffcanvas, setShowOffcanvas] = useState(false);
+    const [showErrorOffcanvas, setShowErrorOffcanvas] = useState(false);
     const [citasEmpleado, setCitasEmpleado] = useState([]);
     const [selectedServicios, setSelectedServicios] = useState([]);
     const [totalDuration, setTotalDuration] = useState(0);
     const [observaciones, setObservaciones] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
     // Definir los servicios y su duración
     const servicios = {
@@ -109,11 +111,14 @@ function Citas() {
         const servicio = event.target.value;
         if (event.target.checked) {
             setSelectedServicios((prevServicios) => [...prevServicios, servicio]);
-            console.log('Servicios seleccionados:', selectedServicios);
         } else {
             setSelectedServicios((prevServicios) => prevServicios.filter((s) => s !== servicio));
         }
     };
+    useEffect(() => {
+        console.log('Servicios seleccionados:', selectedServicios);
+    }, [selectedServicios]);
+
     const handleObservacionesChange = (event) => {
         setObservaciones(event.target.value);
     };
@@ -168,7 +173,25 @@ function Citas() {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        console.log('Selected empleado:', selectedEmpleado);
+        
+
+        if (!selectedTime) {
+            setErrorMessage('Por favor, selecciona una hora.');
+            setShowErrorOffcanvas(true);
+            return;
+        }
+
+        if(selectedDay === null) { 
+            setErrorMessage('Por favor, selecciona un día.');
+            setShowErrorOffcanvas(true);
+            return;
+        }
+        
+        if(selectedServicios.length === 0) {
+            setErrorMessage('Por favor, selecciona al menos un servicio.');
+            setShowErrorOffcanvas(true);
+            return;
+        }
 
         const cita = {
             clienteId: usuario.uid,
@@ -178,7 +201,7 @@ function Citas() {
             fecha: removeTimeFromDate(selectedDay),
             hora: selectedTime,
         };
-        console.log(cita);
+        
         try {
             const citasRef = collection(db, 'citas');
             await addDoc(citasRef, cita);
@@ -209,7 +232,7 @@ function Citas() {
             const deletePromises = citasAEliminar.map(cita => deleteDoc(doc(db, 'citas', cita.id)));
             await Promise.all(deletePromises);
     
-            console.log('Citas antiguas eliminadas');
+            
         } catch (error) {
             console.error('Error al eliminar citas antiguas', error);
         }
@@ -268,7 +291,7 @@ function Citas() {
                                         id={servicio}
                                         name={servicio}
                                         value={servicio}
-                                        onChange={(e) => handleServiceChange(e)}
+                                        onChange={(e) => {handleServiceChange(e); setErrorMessage('');}}
                                     />
                                     <label htmlFor={servicio}>{servicio}</label>
                                 </div>
@@ -285,7 +308,15 @@ function Citas() {
                         <div className="font-bold mt-3">Hora</div>
                         <div className="contHoras mx-auto mt-3">
                             {generateAvailableHours().map(time => (
-                                <button className='btnHoras' key={`${time.hour}:${time.minute}`} type='button' onClick={() => setSelectedTime(`${time.hour}:${time.minute < 10 ? '0' + time.minute : time.minute}`)}>
+                                <button
+                                    className='btnHoras'
+                                    key={`${time.hour}:${time.minute}`}
+                                    type='button'
+                                    onClick={() => {
+                                        setSelectedTime(`${time.hour}:${time.minute < 10 ? '0' + time.minute : time.minute}`);
+                                        setErrorMessage('');
+                                    }}
+                                >
                                     {time.hour}:{time.minute < 10 ? '0' + time.minute : time.minute}
                                 </button>
                             ))}
@@ -304,6 +335,14 @@ function Citas() {
                 </Offcanvas.Header>
                 <Offcanvas.Body>
                     <p className='fs-1 mt-4'>Tu cita ha sido creada correctamente.</p>
+                </Offcanvas.Body>
+            </Offcanvas>
+            <Offcanvas show={showErrorOffcanvas} onHide={() => setShowErrorOffcanvas(false)} placement='top' className='errorOffCanva'>
+                <Offcanvas.Header closeButton>
+                    <Offcanvas.Title>Error</Offcanvas.Title>
+                </Offcanvas.Header>
+                <Offcanvas.Body>
+                    <p className='fs-1 mt-4'>{errorMessage}</p>
                 </Offcanvas.Body>
             </Offcanvas>
         </div>

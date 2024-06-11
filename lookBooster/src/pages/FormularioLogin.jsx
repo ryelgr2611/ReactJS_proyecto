@@ -3,22 +3,20 @@ import { Form, Button } from 'react-bootstrap';
 import './FormLogin.css'; 
 import Logo from '../assets/logoCompleto.png';
 import { Link } from 'react-router-dom';
-import { FaGoogle, FaApple } from "react-icons/fa";
+import { FaGoogle } from "react-icons/fa";
 import app from '../firebase/config';
 import 'firebase/auth';
-import { getAuth,sendPasswordResetEmail } from 'firebase/auth'; // Add this import statement
+import { getAuth } from 'firebase/auth'; // Add this import statement
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'; // Add this import statement
 import { db } from '../firebase/config';
-import { collection, addDoc, getDocs } from 'firebase/firestore'; 
+import { collection, addDoc } from 'firebase/firestore'; 
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 
 
 
 const auth = getAuth(app);
 const dbClientes = collection(db, 'clientes');
-// getDocs(dbClientes)
-//   .then((doc) => {
-//     console.log(doc.docs[0].data());});
+
 const dbEmpleados = collection(db, 'empleados');
 
 
@@ -64,20 +62,19 @@ function FormularioLogin() {
         if (email.includes('.lookbooster')) {
           await addDoc(dbEmpleados, usuario);
                 
-          console.log('Empleado registrado');
+          
         } else {
           await addDoc(dbClientes, usuario);
-          console.log('Cliente registrado');
+          
         }
     } else {
       await signInWithEmailAndPassword(auth, email, password);
       
-      console.log('Usuario logueado');
     }
     
-    // Redirect to home page
+    // Redirect 
     
-    window.history.back();
+    window.location.href = '/perfil';
   };
 
   return (
@@ -109,6 +106,8 @@ function FormularioLogin() {
                         required 
                         id='password' 
                         className="password-input"
+                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=_-]).{8,}"
+                        title="Debe contener al menos un número, una letra mayúscula, una letra minúscula, un carácter especial y al menos 8 o más caracteres."
                     />
                     <div className="password-icon" onClick={handleReveal}>
                         {revealed ? <BsEyeSlash /> : <BsEye />}
@@ -116,7 +115,7 @@ function FormularioLogin() {
                 </div>
                   {registrando && <Form.Control className='mt-4' type="text" placeholder="Nombre" id='name' />}
                   {registrando && <Form.Control className='mt-4' type="text" placeholder="Apellido" id='surname' />}
-                  {registrando && <Form.Control className='mt-4' type="phone" placeholder="Teléfono" id='phone' />}
+                  {registrando && <Form.Control className='mt-4' type="phone" placeholder="Teléfono" id='phone' pattern="[67][0-9]{8}" title="Debe ser un número de teléfono válido" />}
                   <span className="fa fa-fw fa-eye field-icon toggle-password" />
                   <div className="text-md-end mt-2">
                   {!registrando && <a href="#" onClick={() => ResetPassAsync(document.getElementById('email').value)}>Olvidé la contraseña</a>}

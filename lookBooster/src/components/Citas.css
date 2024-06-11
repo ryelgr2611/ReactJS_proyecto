@@ -47,6 +47,13 @@
     justify-content: center;
     text-align: center;
 }
+.errorOffCanva{
+    background-color: #d34f4aff;
+    color: white;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
 .contHoras{
     display: grid;
     justify-content: center;

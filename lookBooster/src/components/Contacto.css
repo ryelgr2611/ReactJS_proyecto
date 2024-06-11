@@ -1,0 +1,48 @@
+/* Contacto.css */
+
+.contacto-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.contacto-form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.contacto-form input[type="text"],
+.contacto-form input[type="email"],
+.contacto-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.contacto-form textarea {
+    height: 150px; /* Ajusta la altura según sea necesario */
+}
+
+.contacto-form .btn-enviar {
+    background-color: #2d5588ff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.contacto-form .btn-enviar:hover {
+    background-color: #d34f4aff;
+}
+
+.mensaje-enviado {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 20px;
+}

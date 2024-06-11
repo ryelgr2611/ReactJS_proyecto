@@ -1,8 +1,6 @@
 import React from 'react'
 import barbervid from '../assets/barbervid.mp4'
 import { Link } from 'react-router-dom'
-import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
-import logo from '../assets/logoCompleto.png';
 import './About.css';
 import { TbArrowBadgeDown } from "react-icons/tb";
 

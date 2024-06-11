@@ -6,11 +6,9 @@ import { useState, useEffect } from 'react';
 import Barba1 from '../assets/barba1.jpg';
 import Barba2 from '../assets/barba2.jpg';
 import Barba3 from '../assets/barba3.jpeg';
-
 import Footer from './Footer';
 import './Barba.css';
 
-const auth = getAuth(app);
 
 function Barba(){
 

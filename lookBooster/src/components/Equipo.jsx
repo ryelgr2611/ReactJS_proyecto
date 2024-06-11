@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
 import './Equipo.css'
 import Raul from '../assets/raul.jpeg'
 import Alex from '../assets/alex.jpg'

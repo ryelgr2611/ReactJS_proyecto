@@ -7,7 +7,7 @@ import { onAuthStateChanged, getAuth } from 'firebase/auth';
 import {
     MDBCol, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBBtn
 } from 'mdb-react-ui-kit';
-import Calendar from 'react-calendar';
+import ReactLoading from 'react-loading';
 import './Perfil.css';
 
 function Perfil() {
@@ -18,6 +18,78 @@ function Perfil() {
     const [empleados, setEmpleados] = useState([]);
     const [clientes, setClientes] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [editandoPerfil, setEditandoPerfil] = useState(false);
+    const [datosEditadosUsuario, setDatosEditadosUsuario] = useState({});
+    const [idDocumento, setIdDocumento] = useState(null);
+
+    useEffect(() => {
+        if (datosUsuario) {
+            setDatosEditadosUsuario(datosUsuario);
+        }
+    }, [datosUsuario]);
+
+    useEffect(() => {
+        const obtenerDatosUsuario = async () => {
+            if (usuario) {
+                const coleccion = usuario.email.includes('lookbooster') ? 'empleados' : 'clientes';
+                try {
+                    const usuarioRef = collection(db, coleccion);
+                    const snapshot = await getDocs(usuarioRef);
+                    const usuarioData = snapshot.docs.find(doc => doc.data().id === usuario.uid);
+
+                    if (usuarioData) {
+                        setDatosUsuario({ docId: usuarioData.id, ...usuarioData.data() });
+                        setIdDocumento(usuarioData.id);
+                    } else {
+                        console.error('No se encontró el usuario en la colección.');
+                    }
+                } catch (error) {
+                    console.error(`Error al obtener los datos del usuario desde la colección ${coleccion}`, error);
+                }
+            }
+        };
+        obtenerDatosUsuario();
+    }, [usuario]);
+
+    const handleChangePerfil = (e) => {
+        setDatosEditadosUsuario({
+            ...datosEditadosUsuario,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const handleGuardarPerfil = async (e) => {
+        e.preventDefault();
+        
+        try {
+            const coleccion = usuario.email.includes('lookbooster') ? 'empleados' : 'clientes';
+            const usuarioDocId = idDocumento;
+
+            if (!usuarioDocId) {
+                console.error('ID del documento no está definido.');
+                return;
+            }
+
+            
+            const usuarioRef = doc(db, coleccion, usuarioDocId);
+            await updateDoc(usuarioRef, {
+                nombre: datosEditadosUsuario.nombre,
+                apellido: datosEditadosUsuario.apellido,
+                telefono: datosEditadosUsuario.telefono,
+            });
+
+            // Actualizar los datos del estado local
+            setDatosUsuario({
+                ...datosUsuario,
+                nombre: datosEditadosUsuario.nombre,
+                apellido: datosEditadosUsuario.apellido,
+                telefono: datosEditadosUsuario.telefono,
+            });
+            setEditandoPerfil(false);
+        } catch (error) {
+            console.error('Error al actualizar los datos del perfil', error);
+        }
+    };
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (usuarioAuth) => {
@@ -86,7 +158,12 @@ function Perfil() {
     };
 
     if (loading) {
-        return <div>Cargando...</div>;
+        return (
+            <div className="d-flex flex-column justify-content-center align-items-center vh-100">
+                <ReactLoading type={'spinningBubbles'} color='#d34f4aff' height={'200px'} width={'200px'} />
+                <div className='h1'>Cargando</div>
+            </div>
+        );
     }
 
     const editarCita = async (citaEditada) => {
@@ -98,6 +175,14 @@ function Perfil() {
             console.error('Error al actualizar la cita', error);
         }
     };
+    const citasPorFecha = citas.reduce((acc, cita) => {
+        const fecha = cita.fecha.split(' ')[0]; // Asume que la fecha está en formato "DD-MM-YYYY"
+        if (!acc[fecha]) {
+            acc[fecha] = [];
+        }
+        acc[fecha].push(cita);
+        return acc;
+    }, {});
     return (
         <div>
             <Header correoUsuario={usuario ? usuario.email : null} />
@@ -105,84 +190,179 @@ function Perfil() {
                 <div className="container-fluid py-5">
                     <MDBRow>
                         <MDBCol lg="4" md="12">
-                            <MDBCard className="mb-4 border-0">
-                                <MDBCardBody className="text-center">
-                                    <MDBCardImage
-                                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
-                                        alt="avatar"
-                                        className="rounded-circle"
-                                        style={{ width: '150px' }}
-                                        fluid />
-                                    <MDBRow className='mt-5'>
-                                        <MDBCol sm="4">
-                                            <MDBCardText>Nombre</MDBCardText>
-                                        </MDBCol>
-                                        <MDBCol sm="8">
-                                            <MDBCardText className="text-muted">{datosUsuario?.nombre || ''}</MDBCardText>
-                                        </MDBCol>
-                                    </MDBRow>
-                                    <hr />
-                                    <MDBRow>
-                                        <MDBCol sm="4">
-                                            <MDBCardText>Apellido</MDBCardText>
-                                        </MDBCol>
-                                        <MDBCol sm="8">
-                                            <MDBCardText className="text-muted">{datosUsuario?.apellido || ''}</MDBCardText>
-                                        </MDBCol>
-                                    </MDBRow>
-                                    <hr />
-                                    <MDBRow>
-                                        <MDBCol sm="4">
-                                            <MDBCardText>Email</MDBCardText>
-                                        </MDBCol>
-                                        <MDBCol sm="8">
-                                            <MDBCardText className="text-muted">{datosUsuario?.correo || ''}</MDBCardText>
-                                        </MDBCol>
-                                    </MDBRow>
-                                    <hr />
-                                    <MDBRow>
-                                        <MDBCol sm="4">
-                                            <MDBCardText>Teléfono</MDBCardText>
-                                        </MDBCol>
-                                        <MDBCol sm="8">
-                                            <MDBCardText className="text-muted">{datosUsuario?.telefono || ''}</MDBCardText>
-                                        </MDBCol>
-                                    </MDBRow>
-                                </MDBCardBody>
-                            </MDBCard>
+                        <MDBCard className="mb-4 border-0">
+                            <MDBCardBody className="text-center">
+                                <MDBCardImage
+                                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                                    alt="avatar"
+                                    className="rounded-circle"
+                                    style={{ width: '150px' }}
+                                    fluid />
+                                {editandoPerfil ? (
+                                    <form onSubmit={handleGuardarPerfil}>
+                                        <MDBRow className='mt-5'>
+                                            <MDBCol sm="4">
+                                                <MDBCardText>Nombre</MDBCardText>
+                                            </MDBCol>
+                                            <MDBCol sm="8">
+                                                <input
+                                                    type="text"
+                                                    name="nombre"
+                                                    value={datosEditadosUsuario.nombre || ''}
+                                                    onChange={handleChangePerfil}
+                                                    className="form-control"
+                                                />
+                                            </MDBCol>
+                                        </MDBRow>
+                                        <hr />
+                                        <MDBRow>
+                                            <MDBCol sm="4">
+                                                <MDBCardText>Apellido</MDBCardText>
+                                            </MDBCol>
+                                            <MDBCol sm="8">
+                                                <input
+                                                    type="text"
+                                                    name="apellido"
+                                                    value={datosEditadosUsuario.apellido || ''}
+                                                    onChange={handleChangePerfil}
+                                                    className="form-control"
+                                                />
+                                            </MDBCol>
+                                        </MDBRow>
+                                        <hr />
+                                        <MDBRow>
+                                            <MDBCol sm="4">
+                                                <MDBCardText>Teléfono</MDBCardText>
+                                            </MDBCol>
+                                            <MDBCol sm="8">
+                                                <input
+                                                    type="text"
+                                                    name="telefono"
+                                                    value={datosEditadosUsuario.telefono || ''}
+                                                    onChange={handleChangePerfil}
+                                                    className="form-control"
+                                                />
+                                            </MDBCol>
+                                        </MDBRow>
+                                        <hr />
+                                        <button type="submit" className="btn btn-primary me-3">Guardar</button>
+                                        <button type="button" className="btn btn-secondary" onClick={() => setEditandoPerfil(false)}>Cancelar</button>
+                                    </form>
+                                ) : (
+                                    <>
+                                        <MDBRow className='mt-5'>
+                                            <MDBCol sm="4">
+                                                <MDBCardText>Nombre</MDBCardText>
+                                            </MDBCol>
+                                            <MDBCol sm="8">
+                                                <MDBCardText className="text-muted">{datosUsuario?.nombre || ''}</MDBCardText>
+                                            </MDBCol>
+                                        </MDBRow>
+                                        <hr />
+                                        <MDBRow>
+                                            <MDBCol sm="4">
+                                                <MDBCardText>Apellido</MDBCardText>
+                                            </MDBCol>
+                                            <MDBCol sm="8">
+                                                <MDBCardText className="text-muted">{datosUsuario?.apellido || ''}</MDBCardText>
+                                            </MDBCol>
+                                        </MDBRow>
+                                        <hr />
+                                        <MDBRow>
+                                            <MDBCol sm="4">
+                                                <MDBCardText>Email</MDBCardText>
+                                            </MDBCol>
+                                            <MDBCol sm="8">
+                                                <MDBCardText className="text-muted">{datosUsuario?.correo || ''}</MDBCardText>
+                                            </MDBCol>
+                                        </MDBRow>
+                                        <hr />
+                                        <MDBRow>
+                                            <MDBCol sm="4">
+                                                <MDBCardText>Teléfono</MDBCardText>
+                                            </MDBCol>
+                                            <MDBCol sm="8">
+                                                <MDBCardText className="text-muted">{datosUsuario?.telefono || ''}</MDBCardText>
+                                            </MDBCol>
+                                        </MDBRow>
+                                        <button className="btn btn-primary mt-4" onClick={() => setEditandoPerfil(true)}>Editar Perfil</button>
+                                    </>
+                                )}
+                            </MDBCardBody>
+                        </MDBCard>
                         </MDBCol>
 
                         <MDBCol lg="8" md="12">
                             <div className="card-deck mb-4 border-0 bg-transparent">
-                                <div className='d-flex flex-wrap gap-4 justify-content-center'>
-                                    {usuario?.email.includes('lookbooster') ? (
-                                        citas.filter(cita => cita.empleadoId === usuario.uid).map((cita, index) => {
-                                            const cliente = clientes.find(cli => cli.id === cita.clienteId);
-                                            return (
-                                                <CitaCard
-                                                    key={index}
-                                                    cita={cita}
-                                                    persona={cliente}
-                                                    onEliminar={eliminarCita}
-                                                    onEditar={editarCita} // Pasa la función de edición
-                                                    tipo="empleado"
-                                                />
-                                            );
+                            <div className='d-flex flex-wrap gap-4 justify-content-center'>
+                                {usuario?.email.includes('lookbooster') ? (
+                                    Object.entries(citasPorFecha).sort().map(([fecha, citasDelDia]) => {
+                                        citasDelDia = citasDelDia.filter(cita => cita.empleadoId === usuario.uid);
+                                        citasDelDia.sort((a, b) => {
+                                            const [horaA, minutosA] = a.hora.split(':').map(Number);
+                                            const [horaB, minutosB] = b.hora.split(':').map(Number);
+                                            return horaA * 60 + minutosA - (horaB * 60 + minutosB); // Ordena las citas por hora
                                         })
-                                    ) : (
-                                        citas.filter(cita => cita.clienteId === usuario.uid).map((cita, index) => {
-                                            const empleado = empleados.find(emp => emp.id === cita.empleadoId);
-                                            return (
-                                                <CitaCard
-                                                    key={index}
-                                                    cita={cita}
-                                                    persona={empleado}
-                                                    tipo="cliente"
-                                                />
-                                            );
+                                        if (citasDelDia.length === 0) {
+                                            return null; // No renderiza nada si no hay citas
+                                        }
+                                        const [day, month, year] = fecha.split('-').map(Number);
+                                        const fechaObj = new Date(year, month - 1, day);
+                                        const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+                                        const diaSemana = diasSemana[fechaObj.getDay()];
+                                        return (
+                                            <div key={fecha}  className='d-flex flex-wrap gap-4 justify-content-center w-100'>
+                                                <h2 className='w-100 justify-content-start'>{`${diaSemana}, ${fecha}`}</h2>
+                                                {citasDelDia.map((cita, index) => {
+                                                    const cliente = clientes.find(cli => cli.id === cita.clienteId);
+                                                    return (
+                                                        <CitaCard
+                                                            key={index}
+                                                            cita={cita}
+                                                            persona={cliente}
+                                                            onEliminar={eliminarCita}
+                                                            onEditar={editarCita}
+                                                            tipo="empleado"
+                                                        />
+                                                    );
+                                                })}
+                                            </div>
+                                        );
+                                    })
+                                ) : (
+                                    Object.entries(citasPorFecha).sort().map(([fecha, citasDelDia]) => {
+                                        citasDelDia = citasDelDia.filter(cita => cita.clienteId === usuario.uid);
+                                        citasDelDia.sort((a, b) => {
+                                            const [horaA, minutosA] = a.hora.split(':').map(Number);
+                                            const [horaB, minutosB] = b.hora.split(':').map(Number);
+                                            return horaA * 60 + minutosA - (horaB * 60 + minutosB); // Ordena las citas por hora
                                         })
-                                    )}
-                                </div>
+                                        if (citasDelDia.length === 0) {
+                                            return null; // No renderiza nada si no hay citas
+                                        }
+                                        const [day, month, year] = fecha.split('-').map(Number);
+                                        const fechaObj = new Date(year, month - 1, day);
+                                        const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+                                        const diaSemana = diasSemana[fechaObj.getDay()];
+                                        return (
+                                            <div key={fecha}  className='d-flex flex-wrap gap-4 justify-content-center w-100'>
+                                                <h2 className='w-100 justify-content-start'>{`${diaSemana}, ${fecha}`}</h2>
+                                                {citasDelDia.map((cita, index) => {
+                                                    const empleado = empleados.find(emp => emp.id === cita.empleadoId);
+                                                    return (
+                                                        <CitaCard
+                                                            key={index}
+                                                            cita={cita}
+                                                            persona={empleado}
+                                                            tipo="cliente"
+                                                        />
+                                                    );
+                                                })}
+                                            </div>
+                                        );
+                                    })
+                                )}
+                            </div>
                             </div>
                         </MDBCol>
                     </MDBRow>
@@ -194,7 +374,11 @@ function Perfil() {
 
 const CitaCard = ({ cita, persona, onEliminar, onEditar, tipo }) => {
     const [editando, setEditando] = useState(false);
-    const [citaEditada, setCitaEditada] = useState({ ...cita });
+    const [citaEditada, setCitaEditada] = useState(cita);
+
+    useEffect(() => {
+        setCitaEditada(cita);
+    }, [cita]);
 
     const handleEditChange = (e) => {
         setCitaEditada({
@@ -208,6 +392,7 @@ const CitaCard = ({ cita, persona, onEliminar, onEditar, tipo }) => {
         onEditar(citaEditada);
         setEditando(false);
     };
+
 
     return (
         <div id="cartaCita" className={`col-4 ${editando ? 'editando' : ''}`}>
@@ -234,6 +419,7 @@ const CitaCard = ({ cita, persona, onEliminar, onEditar, tipo }) => {
                             value={citaEditada.servicio}
                             onChange={handleEditChange}
                             placeholder="Servicio"
+                            disabled={true}
                         />
                         <textarea
                             name="observaciones"
@@ -245,7 +431,7 @@ const CitaCard = ({ cita, persona, onEliminar, onEditar, tipo }) => {
                     </form>
                 ) : (
                     <div id='cartaCitaFront'>
-                        <p>{cita.fecha}, a las {cita.hora}</p>
+                        <p>A las {cita.hora}</p>
                         <p>Con {tipo === "empleado" ? 'el cliente' : 'el barbero'}: <strong>{persona ? persona.nombre : `${tipo === "empleado" ? 'Cliente' : 'Empleado'} no encontrado`}</strong></p>
                         <p>{cita.servicio}</p>
                         <p>Observaciones: {cita.observaciones}</p>

@@ -1,8 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
-import { FaCreditCard,FaPaypal,FaFacebook,FaTwitter,FaLinkedin,FaInstagram  } from "react-icons/fa";
-import { BsBank2 } from "react-icons/bs";
+import { Row, Col } from 'react-bootstrap';
+import { FaFacebook,FaTwitter,FaLinkedin,FaInstagram  } from "react-icons/fa";
 import { Link } from 'react-router-dom'; // Importa el componente Link de react-router-dom
 import './Footer.css';
 
@@ -15,7 +14,7 @@ function Footer() {
                         <ul className="menu">
                             <li className="menu-item mb-2"><Link className="menu-link" to="/sobre">Sobre Nosotros</Link></li>
                             
-                            <li className="menu-item mb-2"><Link className="menu-link" to="contacto">Contacto</Link></li>
+                            <li className="menu-item mb-2"><Link className="menu-link" to="/contact">Contacto</Link></li>
                         </ul>
                     </Col>
                     <Col xs={12} sm={6} md={3}>
@@ -30,7 +29,7 @@ function Footer() {
                         <h3>Otros Enlaces</h3>
                         <ul className="menu">
                             <li className="menu-item mb-2"><Link className="menu-link" to="#">Proveedores</Link></li>
-                            <li className="menu-item mb-2"><Link className="menu-link" to="#">Política de privacidad</Link></li>
+                            <li className="menu-item mb-2"><Link className="menu-link" to="/privacy">Política de privacidad</Link></li>
                             <li className="menu-item mb-2"><Link className="menu-link" to="#">Política de cookies</Link></li>
                         </ul>
                     </Col>

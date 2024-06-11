@@ -6,11 +6,9 @@ import { useState, useEffect } from 'react';
 import Tinte1 from '../assets/tinte1.jpg';
 import Tinte2 from '../assets/tinte2.jpg';
 import Tinte3 from '../assets/tinte3.jpg';
-
 import Footer from './Footer';
 import './Tinte.css';
 
-const auth = getAuth(app);
 
 function Tinte(){
 
